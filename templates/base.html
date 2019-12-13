@@ -1,0 +1,142 @@
+<!-- saved from url=(0014)about:internet -->
+<!doctype html>
+<html>
+<head>
+{% block title %}<title>Smart Source Cambodia </title>{% endblock %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes,target-densityDpi=medium-dpi">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
+<link rel="stylesheet" href="/media/css/reset.css">
+<link rel="stylesheet" href="/media/css/content.css">
+<link rel="stylesheet" href="/media/css/jquery-ui.css">
+<link rel="stylesheet" href="/media/css/select2.min.css">
+
+</head>
+
+<body>
+
+<!-- wrap -->
+<div class="wrap">
+
+	<!-- head_section -->
+	<div class="head_section">
+		<!-- head_cnt -->
+		<div class="head_cnt">
+			<div class="header_top">
+				<table summary="">
+					<caption></caption>
+					<colgroup>
+						<col style="width:250px;">
+						<col>
+						<col style="width:400px;">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td>
+								<div style="padding-left:20px;"><a href="http://127.0.0.1:8000/home/list" class="logo"><span class="blind">logo</span></a></div>
+							</td>
+							<td>
+								
+							</td>
+							<td>
+								<div>
+									<ul class="menu_head_setting cboth">
+										<li><a href="#none" style="background-image:url(/media/img/icon/ic_top_profile.png);">My Account</a></li>
+										<li><a href="#none" style="background-image:url(/media/img/icon/ic_top_order.png);">Messager</a></li>
+										<li><a href="#none" style="background-image:url(/media/img/icon/ic_top_cart.png);">Demos</a></li>
+										<li><a href="#none" style="background-image:url(/media/img/icon/ic_top_favorite.png);">Deploy</a></li>
+										<li><a href="{% url 'logout' %}">Logout</a></li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- //head_cnt -->
+	</div>
+	<!-- //head_section -->
+
+	<!-- body_section -->
+	<div class="body_section">
+		<div class="container_wrap">
+			<div class="container">
+				<!-- tab wrap -->
+				<div class="tab_wrap cboth">
+					<ul id="wrap-menu">
+						<li><a href="{% url 'dashboard' %}" id="dashboard">Dashboard</a></li>
+						<li><a href="{% url 'project' %}" id="project">Projects</a></li>
+						<li><a href="{% url 'projectfeature' %}" id="projectfeature">Functions & Development</a></li>
+						{% comment %} <li><a href="http://127.0.0.1:8000/demo-board/list" 		  id="demo-board" 			data-url="/demo-board/list" 			>Demo Board				</a></li> {% endcomment %}
+						{% comment %} <li><a href="http://127.0.0.1:8000/sale-operation/list" 	  id="sale-operation" 		data-url="/sale-operation/list" 		>Sale Operations		</a></li> {% endcomment %}
+						{% comment %} <li><a href="{% url 'user' %}" id="user">Users</a></li> {% endcomment %}
+						{% comment %} <li><a href="http://127.0.0.1:8000/out-source/list" 		  id="out-source" 			data-url="/out-source/list" 			>Out Source				</a></li> {% endcomment %}
+
+					</ul>
+				</div>
+				<!-- //tab wrap -->
+               
+                {% block content %}{% endblock %}
+				
+			</div>
+		</div>
+	</div>
+	<!-- //body_section -->
+</div>
+<!-- //wrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+
+<script src="/media/js/moment.js"></script>
+<script src="/media/js/jquery-ui.min.js"></script>
+<script src="/media/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+		//var CURRENT_URL = window.location.href.split('#')[0].split('?')[0];	
+		var url = window.location.pathname.split('/')[1];	
+		if ( url == '') url='home'	;
+		console.log("url", url)
+		$('#wrap-menu').find('a#'+url).parent('li').addClass('on');
+		//$('#wrap-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('on');
+		
+		// backforward- 
+		// $(window).on('hashchange', function(){			
+		// 	var type = window.location.hash.substr(1); 
+		// 	if ( type == '' || type == 'none')
+		// 	{
+		// 		$('#ifr_screen').attr('src', '/home/list');
+		// 		$('#wrap-menu li').removeClass('on').find('a#home').parent('li').addClass('on');
+		// 	}else{
+		// 		$('#ifr_screen').attr('src', $('#'+type).attr('data-url'));
+		// 		$('#wrap-menu li').removeClass('on').find('a#'+type).parent('li').addClass('on');
+		// 	}		
+		// });
+
+		// var type = window.location.hash.substr(1);
+		// if ( type == '' || type == 'none')
+		// {
+		// 	$('#ifr_screen').attr('src', '/home/list');
+		// 	$('#wrap-menu li').removeClass('on').find('a#home').parent('li').addClass('on');
+		// }else{
+		// 	$('#ifr_screen').attr('src', $('#'+type).attr('data-url'));
+		// 	$('#wrap-menu li').removeClass('on').find('a#'+type).parent('li').addClass('on');
+		// }
+
+        // $('#wrap-menu li a').click(function(){
+        //     $(this).parents('ul#wrap-menu').find('li').removeClass('on');
+        //     $(this).parent('li').addClass('on');
+        //     $('#ifr_screen').attr('src', $(this).attr('data-url'));
+			
+        // });
+	
+    });
+</script>
+{% block javascript %}{% endblock %}
+</body>
+</html>
