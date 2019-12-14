@@ -1,5 +1,10 @@
 Django==2.2.8
+django-bootstrap-breadcrumbs==0.9.1
 django-crispy-forms==1.8.1
+django-money==1.0
+Pillow==6.2.1
 psycopg2==2.8.3
+py-moneyed==0.8.0
 pytz==2019.3
+six==1.13.0
 sqlparse==0.3.0

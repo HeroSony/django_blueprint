@@ -1,0 +1,97 @@
+<li
+    {% if 'recruitment_sys' in request.path %}
+        class="nav-item start active"
+    {% else %}
+        class="nav-item start"
+    {% endif %}
+>
+    <a href="{% url 'recruitment_sys' %}" class="nav-link nav-toggle">
+        <i class="icon-home"></i>
+        <span class="title">Dashboard</span>
+        
+        <span
+            {% if 'recruitment_sys' in request.path %}
+                class="selected"
+            {% endif %}
+        ></span>
+    </a>
+</li>
+
+
+
+
+{% comment %} Permissions can create Active Vacancy {% endcomment %}
+{% if False %}
+    <li
+        {% if 'activevacancy' in request.path %}
+            class="nav-item start active"
+        {% else %}
+            class="nav-item start"
+        {% endif %}
+    >
+        <a href="{% url 'recruitment_sys' %}" class="nav-link nav-toggle">
+            <i class="icon-note"></i>
+            <span class="title">Job Order</span>
+            
+            <span
+                {% if 'activevacancy' in request.path %}
+                    class="selected"
+                {% endif %}
+            ></span>
+        </a>
+    </li>
+{% endif %}
+
+{% comment %} Permissions can create Candidate Profile {% endcomment %}
+{% if perms.ca_people and perms.ca_candidate %}
+    <li
+        {% if 'candidateprofile' in request.path %}
+            class="nav-item start active"
+        {% else %}
+            class="nav-item start"
+        {% endif %}
+    >
+        <a href="{% url 'candidateprofile' %}" class="nav-link nav-toggle">
+            <i class="icon-note"></i>
+            <span class="title">Candidate Profile</span>
+            
+            <span
+                {% if 'candidateprofile' in request.path %}
+                    class="selected"
+                {% endif %}
+            ></span>
+        </a>
+    </li>
+{% endif %}
+
+
+{% comment %} Permissions can create Job Post {% endcomment %}
+{% if perms.ca_client %}
+    <li
+        {% if 'clientprofile' in request.path %}
+            class="nav-item start active"
+        {% else %}
+            class="nav-item start"
+        {% endif %}
+    >
+        <a href="{% url 'clientprofile' %}" class="nav-link nav-toggle">
+            <i class="icon-note"></i>
+            <span class="title">Client Profile</span>
+            
+            <span
+                {% if 'clientprofile' in request.path %}
+                    class="selected"
+                {% endif %}
+            ></span>
+        </a>
+    </li>
+{% endif %}
+
+    {% comment %} {{ title }} {% endcomment %}
+
+    {% comment %} Get All permissions {% endcomment %}
+    {% comment %} {{ user.get_all_permissions }} {% endcomment %}
+    {% comment %} {{ perms.polls }} {% endcomment %}
+    
+    {% comment %} {{ user.groups.all.0 }} {% endcomment %}
+

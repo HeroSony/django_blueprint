@@ -1,0 +1,36 @@
+{% if objects.paginator.num_pages > 1 %}
+<div class="row">
+    <div class="col-md-5 col-sm-5">
+        <div style="padding: 15px 0;" class="dataTables_info" id="sample_1_2_info" role="status" aria-live="polite">Showing {{ objects.start_index }} to {{ objects.end_index }} of {{ objects.paginator.count }} records</div>
+    </div>
+    <div class="col-md-7 col-sm-7" style="text-align: right;">
+        <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_2_paginate">
+        <ul class="pagination" style="visibility: visible;">
+
+            {% if objects.has_previous %}
+                <li class="prev"><a  href="?page=1" title="First"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="?page={{ objects.previous_page_number }}" title="Prev"><i class="fa fa-angle-left"></i></a></li>
+            {% endif %}
+
+            {% for num in objects.paginator.page_range %}
+
+                {% if objects.number == num %}
+                <li class="active"><a href="#">{{ num }}</a></li>
+                {% elif num > objects.number|add:'-10' and num < objects.number|add:'10' %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+
+            {% endfor %}
+            
+            {% if objects.has_next %}
+
+                <li class="next"><a href="?page={{ objects.next_page_number }}" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                <li class="next"><a href="?page={{ objects.paginator.num_pages }}" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
+
+            {% endif %}
+            
+        </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,18 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+
+    {% for url, label in breadcrumbs %}
+      {% if not url or forloop.counter == breadcrumbs_total %}
+        <li>
+            <span>{{ label|safe }}</span>
+        </li>
+      {% else %}
+        <li>
+            <a href="{{ url }}">{{ label|safe }}</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    </ul>
+</div>

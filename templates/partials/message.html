@@ -1,0 +1,31 @@
+ {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">  <!-- singular -->
+            <a class="close" data-dismiss="alert">×</a>
+            {{ message|safe }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% comment %} {% if messages %}
+
+<div 
+    class="alert alert-danger alert-dismissable"
+>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</div>
+{% endif %} {% endcomment %}
+
+{% block style %}
+<style>
+
+.alert-error {
+    background-color: #fbe1e3;
+    border-color: #fbe1e3;
+    color: #e73d4a;
+}
+</style>
+{% endblock style %}

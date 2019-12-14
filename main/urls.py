@@ -21,15 +21,15 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 urlpatterns = [
+
+    
+    # Main Config
     path('admin/'                   , admin.site.urls                               ),
     path(''                         , RedirectView.as_view(url='/login/')           ),
-
-    # Customization Admin
     path('login/'                   , auth_views.LoginView.as_view(
                                     template_name='login.html',
                                     redirect_authenticated_user=True), name='login' ),
-	
-    
     path('logout/', auth_views.logout_then_login, name='logout'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
