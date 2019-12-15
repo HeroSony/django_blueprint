@@ -1,0 +1,14 @@
+{% comment %} 
+  ### Popup Form 
+{% endcomment %}
+{% load crispy_forms_tags %}
+
+<div style="display: inline-block; width: 65%; vertical-align:top;">
+    <form action="" method="post" style="padding: 20px; border: 1px solid #ddd">
+        <table>
+          {{ form|crispy }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Submit" />
+    </form>
+</div>

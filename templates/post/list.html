@@ -1,0 +1,183 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+    <div class="col-md-12">
+            <!-- Search Filter-->
+            {% comment %} <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-binoculars font-blue-sharp"></i>
+                        <span class="caption-subject font-blue-sharp bold">Search/Filter</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form role="form" class="" method="post" action="{% url 'dashboard' %}">
+                        {% csrf_token %}
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Profession</label>
+                                    <select name="profession" data-url="{% url 'dashboard' %}" class="form-control input-sm select2">
+                                        <option value=""></option>
+                                        {% for item in profession_list %}
+                                        <option value="{{ item.id }}"
+                                            {% ifequal old_input.profession item.id %}
+                                                selected
+                                            {% endifequal %}
+                                        >{{ item.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>Position</label>
+                                    <select name="position" class="form-control input-sm select2">
+                                        <option value=""></option>
+                                        {% for item in position_list %}
+                                        <option value="{{ item.id }}"
+                                            {% ifequal old_input.position item.id %}
+                                                selected
+                                            {% endifequal %}
+                                        >{{ item.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+
+                                <div class="form-group col-md-4">
+                                    <label>Industry</label>
+                                    <select name="industry" class="form-control input-sm select2">
+                                        <option value=""></option>
+                                        {% for item in industry_list %}
+                                        <option value="{{ item.id }}"
+                                            {% ifequal old_input.industry item.id %}
+                                                selected
+                                            {% endifequal %}
+                                        >{{ item.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Candidate Name</label>
+                                    <input type="text" name="candidate" class="form-control" placeholder="Enter candidate name"
+                                        {% if old_input.candidate %}
+                                            value="{{ old_input.candidate }}"
+                                        {% endif %}
+                                    >
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Employer Name</label>
+                                    <input type="text" name="employer" class="form-control" placeholder="Enter employee name"
+                                        {% if old_input.employer %}
+                                            value="{{ old_input.employer }}"
+                                        {% endif %}
+                                    >
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" class="btn default" id="reset-btn">Reset</button>
+                            <button type="submit" class="btn green">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div> {% endcomment %}
+            <!-- END SAMPLE FORM PORTLET-->
+
+            <!-- List Candidates-->
+            <div class="portlet">
+
+                <div class="btn-group">
+                    <a href="{% url 'postcreate' %}" class="btn sbold green">
+                        <i class="fa fa-plus"></i> New
+                    </a>
+
+                </div>
+
+                {% if old_input %}
+                
+                    <span class="pull-right">{{ objects.paginator.count }}
+                        {% if objects.paginator.count > 1 %}
+                        records were
+                        {% else %}
+                        record was
+                        {% endif %}
+                      found.</span>
+                {% endif %}
+                
+                <div class="portlet-body">
+                    <div class="table-scrollable">
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="10%">
+                                <col width="25%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Posted by</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            {% if objects %}
+
+                            <tbody>
+
+                                {% for object in objects %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ object.name }} </td>
+                                        <td>{{ object.price }} </td>
+                                        <td>{{ object.created_by }}</td>
+                                        <td>
+                                            <a href="{% url 'postdetail' object.id %}" class="btn btn-outline btn-sm blue">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+
+                                            <a href="{% url 'postdetail' object.id %}" class="btn btn-outline btn-sm blue">
+                                                <i class="fa fa-edit"></i> Edit 
+                                            </a>
+
+                                            <a href="{% url 'postdetail' object.id %}" class="btn btn-outline btn-sm red">
+                                                <i class="fa fa-trash-o"></i> Delete 
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    
+                                {% endfor %}
+
+                                
+                                
+                               
+                            </tbody>
+                            {% else %}
+                            <tfoot>
+                                <tr><td colspan="4">No contents.</td></tr>
+                            </tfoot>
+                            {% endif %}
+
+
+                        </table>
+                    </div>
+
+                    {% comment %} Pagination {% endcomment %}
+                    {% include '../partials/pagination.html' %}
+                    
+
+                </div>
+            </div>
+            <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+
+{% endblock  %}
