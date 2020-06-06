@@ -1,4 +1,4 @@
-Django==2.2.8
+Django==2.2.13
 django-addanother==2.0.0
 django-bootstrap-breadcrumbs==0.9.1
 django-cleanup==4.0.0
